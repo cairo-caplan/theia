@@ -6,12 +6,9 @@
 
 ## 1.73.0 - tbd
 
-<<<<<<< HEAD
 - [ai-core] discovered skills from `.agents/skills` directories alongside `.prompts/skills` (workspace and home directory) [#17553](https://github.com/eclipse-theia/theia/pull/17553)
 - [ai-mcp] added OAuth 2.1 authorization for remote MCP servers, including interactive sign-in/sign-out, automatic token refresh and storage, and a command to retrieve the OAuth redirect URL [#17638](https://github.com/eclipse-theia/theia/pull/17638)
-=======
 - [core, terminal-manager] fixed terminal manager tree corruption after deleting the last terminal of a group/page so that subsequent task or debug terminals reappear correctly under the dedicated page [#17587](https://github.com/eclipse-theia/theia/pull/17587)
->>>>>>> 05a8b1ceb (Fix tree cache & terminal ID bugs)
 - [terminal] fixed Cmd+V / Ctrl+V paste in the integrated terminal and restored the effect of the `terminal.enablePaste` and `terminal.enableCopy` preferences [#17603](https://github.com/eclipse-theia/theia/pull/17603)
 - [terminal, task, terminal-manager] guaranteed uniqueness of `TerminalWidgetFactoryOptions.created` to prevent terminal-id collisions between widgets constructed within the same millisecond (and, for the task service, the same second) [#17587](https://github.com/eclipse-theia/theia/pull/17587)
 
@@ -28,6 +25,7 @@
 - [core] added `removeNode(node: TreeNode | undefined): void` to the `Tree` interface (and therefore `TreeModel`). The default `TreeImpl` implementation is now public (was `protected`). Downstream `Tree`/`TreeModel` implementations must add this method [#17587](https://github.com/eclipse-theia/theia/pull/17587)
 - [core] `CompositeTreeNode.removeChild` now clears `parent`, `previousSibling`, and `nextSibling` on the removed node (symmetric with `setParent`). It also accepts an optional `tree?: Tree` parameter; when provided, the detached subtree is purged from the tree's id-to-node index so `Tree.getNode` no longer returns orphans. Existing callers that read the removed node's `parent` after detachment must capture it before the call [#17587](https://github.com/eclipse-theia/theia/pull/17587)
 - [terminal] `TerminalWidgetFactoryOptions.created` is now produced by the exported `nextTerminalCreationToken()` helper and treated as an opaque, lifetime-unique identifier, consistent with its documentation. Downstream producers of terminal widgets should switch to `nextTerminalCreationToken()` to honor the uniqueness contract [#17587](https://github.com/eclipse-theia/theia/pull/17587)
+- [terminal] `TerminalService.open` now returns `Promise<void>` instead of `void`; callers that depend on the return type must be updated [#17587](https://github.com/eclipse-theia/theia/pull/17587)
 
 ## 1.72.0 - 5/28/2026
 
